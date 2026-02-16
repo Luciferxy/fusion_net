@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.so
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# Model checkpoints (too large for GitHub)
+checkpoints/
+checkpoints_debug/
+*.pth
+*.pt
+*.ckpt
+
+# Dataset files (too large for GitHub)
+data/
+MSRS_dataset/
+
+# Output files
+outputs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

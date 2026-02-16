@@ -1,0 +1,55 @@
+# ============================================
+# Fusion-UNet Training Configuration
+# ============================================
+
+# --- Data ---
+data:
+  train_dir: "data/train"
+  val_dir: "data/val"
+  test_dir: "data/test"
+  image_size: 256
+  batch_size: 2
+  num_workers: 0
+  pin_memory: true
+
+# --- Training ---
+training:
+  epochs: 50
+  optimizer:
+    type: "adam"
+    lr: 1.0e-4
+    weight_decay: 1.0e-5
+    betas: [0.9, 0.999]
+  scheduler:
+    type: "cosine" # cosine | plateau | step
+    T_max: 200 # for cosine
+    eta_min: 1.0e-6 # for cosine
+    patience: 10 # for plateau
+    factor: 0.5 # for plateau
+  gradient_clip: 1.0
+  mixed_precision: true # FP16 training
+
+# --- Loss ---
+loss:
+  intensity_weight_ir: 0.5 # λ1
+  intensity_weight_vis: 0.5 # λ2
+  ssim_weight: 1.0 # α
+  gradient_weight: 0.5 # β
+  ssim_window_size: 11
+
+# --- Logging ---
+logging:
+  log_interval: 50 # steps between loss prints
+  image_interval: 1 # epochs between image saves
+  tensorboard_dir: "experiments/logs"
+
+# --- Checkpointing ---
+checkpoint:
+  save_dir: "checkpoints"
+  save_interval: 10 # epochs between saves
+  early_stopping_patience: 20
+
+# --- Validation ---
+validation:
+  metrics: ["ssim", "psnr", "entropy", "mi", "ag"]
+  primary_metric: "ssim" # metric for best model selection

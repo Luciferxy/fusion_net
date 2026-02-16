@@ -1,0 +1,48 @@
+# --- Data ---
+data:
+  train_dir: "data/train"
+  val_dir: "data/val"
+  image_size: 256
+  batch_size: 2
+  num_workers: 0 # Windows safe
+  pin_memory: true
+
+# --- Training ---
+training:
+  epochs: 1
+  optimizer:
+    type: "adam"
+    lr: 1.0e-4
+  scheduler:
+    type: "cosine"
+    T_max: 50
+    eta_min: 1.0e-6
+  loss_weights:
+    intensity: 1.0
+    ssim: 5.0
+    gradient: 10.0
+  log_interval: 1
+  save_checkpoint_epochs: 1
+  val_interval: 1
+  early_stopping_patience: 20
+  checkpoint_dir: "checkpoints_debug"
+
+# --- Loss ---
+loss:
+  intensity_weight_ir: 0.5
+  intensity_weight_vis: 0.5
+  ssim_weight: 1.0
+  gradient_weight: 0.5
+  ssim_window_size: 11
+
+# --- Logging ---
+logging:
+  log_interval: 1
+  image_interval: 1
+  tensorboard_dir: "experiments/logs_debug"
+
+# --- Checkpointing ---
+checkpoint:
+  save_dir: "checkpoints_debug"
+  save_interval: 1
+  early_stopping_patience: 20

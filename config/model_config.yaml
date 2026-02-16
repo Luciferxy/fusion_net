@@ -1,0 +1,26 @@
+# ============================================
+# Fusion-UNet Model Configuration
+# ============================================
+
+model:
+  name: "FusionUNet"
+  in_channels: 3 # Input channels (RGB)
+  out_channels: 3 # Output channels (RGB fused)
+
+  encoder:
+    channels: [64, 128, 256, 512, 1024]
+    num_levels: 5
+    shared_weights: false # IR and VIS encoders have separate weights
+
+  fusion:
+    strategy: "attention" # attention | concat | add
+    channel_attention: true
+    spatial_attention: true
+    reduction_ratio: 16 # For squeeze-excitation
+
+  decoder:
+    channels: [512, 256, 128, 64]
+    num_levels: 4
+
+  output:
+    activation: "sigmoid" # sigmoid | tanh | none
