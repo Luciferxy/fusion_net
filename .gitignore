@@ -21,7 +21,7 @@ checkpoints_debug/
 *.ckpt
 
 # Dataset files (too large for GitHub)
-data/
+/data/
 MSRS_dataset/
 
 # Output files
